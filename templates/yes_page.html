@@ -3,13 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AP-MESSAGE⁉</title>
+    <title>AP-MESSAGE-RESULT</title>
 </head>
 <body>
     <div class="container">
-        <h1>AP-MESSAGE⁉</h1>
-        <p> Indeed you're fake, why would you allow to be manipulated!!!</p>
-        <button onclick="window.close();">Exit</button>
+        <div class="message-box result-box">
+            <h1>AP-MESSAGE!!!!</h1>
+            <p class="result-text">
+                Indeed you're fake, why would you allow yourself to be manipulated!!!!
+            </p>
+            
+            <div class="exit-section">
+                <p class="exit-text">Exit my program please.</p>
+                <button class="btn exit-btn" onclick="exitProgram()">Exit</button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function exitProgram() {
+            if (confirm("Are your sure you want to exit?")) {
+                window.close();
+
+                setTimeout(()=>{
+                    window.location.herf = '/exit';
+                }, 500);
+            }
+        }
+
+        window.addEventListener('load', function(){
+            const resultText = document.querySelector('.result-text');
+            resultText.style.opacity='0';
+            resultText.style.transform='translateY(-20PX)';
+
+            setTimeout(()=> {
+                resultText.style.transition='all 1s ease-in-out';
+                resultText.style.opacity='1';
+                resultText.style.transform='translateY(0)';
+            }, 500);
+        });
+    </script>
     </body>
 </html>

@@ -4,28 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP-MESSAGE⁉</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='stylesheet.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
     <div class="container">
         <h1>AP-MESSAGE⁉</h1>
         <p>Are you fake??</p>
-        <button onclick="location.href='{{ url_for('yes')}}'">Yes</button>
 
-        <button onclick="location.href='{{ url_for('no')}}'">No</button>
+        <div class="buttons-container">
+        <button id="yes-btn" onclick="window.location.herf='/yes'">Yes</button>
+        <button id="no-btn" onclick="btn no-btn">No</button>
+
+        
     </div>
 
     <script>
-        function moveNoButton() {
-            const button = document.getElementById('no-btn');
+        // JavaScript to make the "No" button evasive
+        const noBtn = document.getElementById('no-btn');
+        const container = document.querySelector('.container');
+        let moveCount = 0;
 
-            button.style.postion = 'absolute';
+        noBtn.addEventListener('click', function() {
+            moveCount++;
             
-            button.style.top = Math.random() * window.innerHeight + 'px';
+            // Get container dimensions
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate max positions to keep button within container
+            const maxX = containerRect.width - btnRect.width - 20;
+            const maxY = containerRect.height - btnRect.height - 20;
+            
+            // Generate random position
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            // Apply the new position
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Add some fun animations
+            noBtn.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4})`;
+            
+            // After several attempts, make it move faster
+            if (moveCount > 5) {
+                noBtn.style.transition = 'all 0.1s ease-in-out';
+            }
+            
+            // Change button text occasionally for fun
+            const funTexts = ['No', 'Nope', 'Never', 'No way', 'Nah', 'Not happening'];
+            if (moveCount % 3 === 0) {
+                noBtn.textContent = funTexts[Math.floor(Math.random() * funTexts.length)];
+            }
+        });
 
-            button.style.left = Math.random() * window.innerWidth + 'px';
-        }
+        // Add hover effect to make it even more evasive
+        noBtn.addEventListener('mouseenter', function() {
+            if (moveCount > 2) {
+                // Trigger click event to move the button
+                noBtn.click();
+            }
+        });
+            
     </script>
-       
 </body>
 </html>
