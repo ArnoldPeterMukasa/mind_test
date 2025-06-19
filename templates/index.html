@@ -14,6 +14,18 @@
 
         <button onclick="location.href='{{ url_for(no)}}'">No</button>
     </div>
+
+    <script>
+        function moveNoButton() {
+            const button = document.getElementById('no-btn');
+
+            button.style.postion = 'absolute';
+            
+            button.style.top = Math.random() * window.innerHeight + 'px';
+
+            button.style.left = Math.random() * window.innerWidth + 'px';
+        }
+    </script>
        
 </body>
 </html>
